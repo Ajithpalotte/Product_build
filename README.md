@@ -3,8 +3,6 @@
 ## Overview
 <Description about product>
 
-![Process Flow Diagram]()
-
 ## Table of Contents
 - [Process Flow Diagram](#process-flow-diagram)
 - [Sequence Diagram](#sequence-diagram)
