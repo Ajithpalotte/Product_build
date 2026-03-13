@@ -1,0 +1,16 @@
+%%{ init: { 'theme': 'default' } }%%
+sequenceDiagram
+    participant User
+    participant AuthServer
+    participant ResourceServer
+
+    User->>AuthServer: Login with credentials
+    AuthServer-->>User: JWT token + Refresh token
+
+    User->>ResourceServer: Access protected resource with JWT token
+    ResourceServer-->>AuthServer: Validate JWT token
+    AuthServer-->>ResourceServer: Token valid
+    ResourceServer-->>User: Access granted
+
+    User->>AuthServer: Request new access token with Refresh token
+    AuthServer-->>User: New JWT token (if refresh token is valid)
