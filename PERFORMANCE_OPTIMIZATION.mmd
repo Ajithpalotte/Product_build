@@ -1,0 +1,34 @@
+%%{ init : { "theme" : "default" } }}%%
+
+sequenceDiagram
+    participant User
+    participant Browser
+    participant CDN
+    participant Redis
+    participant Server
+
+    User->>Browser: Request for Data
+    Browser->>CDN: Check for Cached Data
+    alt Data in CDN
+        CDN-->>Browser: Send Cached Data
+    else Data not in CDN
+        Browser->>Redis: Request Data
+        alt Data in Redis
+            Redis-->>Browser: Send Cached Data
+        else Data not in Redis
+            Browser->>Server: Fetch Data
+            Server-->>Browser: Send Fresh Data
+            Browser->>Redis: Cache Data
+        end
+        Browser->>CDN: Store Cached Data
+    end
+
+    Browser->>User: Display Data
+
+    User->>Browser: Request for Validation
+    Browser->>Server: ETag Validation
+    alt Valid ETag
+        Server-->>Browser: Send 304 Not Modified
+    else Invalid ETag
+        Server-->>Browser: Send Fresh Data
+    end
