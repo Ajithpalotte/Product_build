@@ -1,0 +1,21 @@
+```mermaid
+graph TD
+    A[User] -->|Uses| B[Frontend]
+    B -->|Requests Data| C[API]
+    C -->|Fetches from| D[Database]
+    C -->|Sends Data to| E[Backend]
+    E -->|Processes| F[Service]
+    E -->|Interacts with| G[Microservices]
+    D -->|Stores| H[Data Storage]
+    F -->|Sends Data to| B
+    G -->|Communicates| H
+```
+
+### System Architecture Diagram
+- The system consists of a User, Frontend, API, Backend, Service, Microservices, and Database.
+
+### Component Design
+- Components include Frontend for user interaction, Backend for business logic, and Database for data storage.
+
+### Database Relationships
+- Users interact with the Frontend, which communicates with the Backend and Database to fetch and store data.
